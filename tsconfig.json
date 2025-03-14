@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    // Configuración básica del compilador
+    "target": "ES2023",                  // Compila a una versión moderna de JavaScript (compatible con Node.js)
+    "module": "NodeNext",                  // Usa módulos ES (import/export)
+    "moduleResolution": "NodeNext",      // Resolución de módulos compatible con Node.js
+    "moduleDetection": "force",
+    "strict": true,                      // Habilita todas las verificaciones estrictas de TypeScript
+    "esModuleInterop": true,             // Permite interoperabilidad entre CommonJS y ESM
+    "skipLibCheck": true,                // Omite la verificación de tipos en archivos .d.ts
+    "forceConsistentCasingInFileNames": true, // Evita problemas con mayúsculas/minúsculas en nombres de archivos
+    "resolveJsonModule": true,        
+    "noUnusedLocals": true,                           /* Enable error reporting when local variables aren't read. */
+    "noUnusedParameters": true, 
+    "noFallthroughCasesInSwitch": true,
+  
+    "outDir": "./dist",                  // Directorio de salida para archivos transpilados (opcional)
+    "rootDir": "./src",    
+
+    // Directorio raíz de los archivos fuente
+    "paths": {
+      "@controllers/*": ["./controllers/*"],
+      "@services/*": ["./services/*"],
+      "@utils/*": ["./utils/*"]            // Alias para ./src/utils/*
+    },
+    // Configuración específica para proyectos de Node.js
+    "types": ["node"],                   // Incluye tipos globales de Node.js
+    "isolatedModules": true,             // Compatible con herramientas como `tsx` y `esbuild`
+    "allowSyntheticDefaultImports": true // Permite importaciones sintéticas por defecto
+  },
+  "include": ["src/**/*"],               // Incluye todos los archivos dentro de la carpeta src
+  "exclude": ["node_modules", "dist"]    // Excluye archivos irrelevantes para la transpilación
+}
