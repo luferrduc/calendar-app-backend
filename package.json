@@ -5,19 +5,24 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch --require tsconfig-paths/register ./src/index.ts",
-    "build": "tsc && tsc-alias",
-    "start": "node ./dist/index.js",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "clean": "rimraf dist",
+    "copy-static": "cpy src/public/**/* dist/public",
+    "build": "pnpm run clean && tsc && tsc-alias && pnpm run copy-static",
+    "start": "node ./dist/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@types/express": "5.0.0",
+    "cpy-cli": "^5.0.0",
     "dotenv": "^16.4.7",
     "express": "4.21.2",
+    "rimraf": "^6.0.1",
     "tsc-alias": "^1.8.11",
-    "tsconfig-paths": "^4.2.0"
+    "tsconfig-paths": "^4.2.0",
+    "winston": "^3.17.0"
   },
   "devDependencies": {
     "@types/node": "22.13.10",
