@@ -13,15 +13,20 @@
     "noUnusedLocals": true,                           /* Enable error reporting when local variables aren't read. */
     "noUnusedParameters": true, 
     "noFallthroughCasesInSwitch": true,
-  
+    "strictNullChecks": true,
     "outDir": "./dist",                  // Directorio de salida para archivos transpilados (opcional)
     "rootDir": "./src",    
 
     // Directorio raíz de los archivos fuente
     "paths": {
+      "@routes/*": ["./routes/*"],
       "@controllers/*": ["./controllers/*"],
       "@services/*": ["./services/*"],
-      "@utils/*": ["./utils/*"]            // Alias para ./src/utils/*
+      "@utils/*": ["./utils/*"],
+      "@models/*": ["./models/*"],
+      "@middlewares/*": ["./middlewares/*"],
+      "@types/*": ["./types/*"],
+      "@validators/*": ["./validators/*"]
     },
     // Configuración específica para proyectos de Node.js
     "types": ["node"],                   // Incluye tipos globales de Node.js

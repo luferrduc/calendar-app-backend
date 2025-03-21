@@ -30,7 +30,7 @@ const loggerFormat = winston.format.combine(
 		label: "[LOGGER]"
 	}),
 	winston.format.timestamp({
-		format: "YYYY-MM-DD HH:mm:ss"
+		format: "DD-MM-YYYY HH:mm:ss"
 	}),
 	winston.format.printf((info) => {
 		return `${info.label} [${
@@ -60,7 +60,7 @@ if (ENVIRONMENT == "PROD") {
 						label: "[LOGGER]"
 					}),
 					winston.format.timestamp({
-						format: "YYYY-MM-DD HH:mm:ss"
+						format: "DD-MM-YYYY HH:mm:ss"
 					}),
 					winston.format.printf((info) => {
 						return `${info.label} [${
@@ -80,6 +80,6 @@ if (ENVIRONMENT == "PROD") {
 
 export const addLogger = (req: Request, _res: Response, next: NextFunction) => {
 	req.logger = logger
-	req.logger.info(`${req.method} en ${req.url} - ${new Date().toISOString()}`)
+	req.logger.http(`${req.method} en ${req.url}`)
 	next()
 };
