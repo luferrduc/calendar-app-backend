@@ -15,14 +15,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cpy-cli": "^5.0.0",
-    "dotenv": "^16.4.7",
+    "cpy-cli": "5.0.0",
+    "dotenv": "16.4.7",
     "express": "4.21.2",
-    "express-validator": "^7.2.1",
-    "rimraf": "^6.0.1",
-    "tsc-alias": "^1.8.11",
-    "tsconfig-paths": "^4.2.0",
-    "winston": "^3.17.0"
+    "express-validator": "7.2.1",
+    "mongoose": "^8.12.2",
+    "rimraf": "6.0.1",
+    "tsc-alias": "1.8.11",
+    "tsconfig-paths": "4.2.0",
+    "winston": "3.17.0"
   },
   "devDependencies": {
     "@types/express": "4.17.21",
