@@ -1,15 +1,25 @@
 import { Router } from "express";
-import { login, register, revalidateToken } from "../controllers/auth.controller";
+import { AuthController } from "../controllers/auth.controller";
 import { validateRequest } from "../middlewares/validateRequest";
 import { loginValidator, registerValidator } from "../validators/auth.validator";
+import { Users as UsersDao} from "../dao/user.manager"
+import { UserRepository } from "../repositories/user.repository";
+import { AuthService } from "../services/auth.services";
+
+// TODO: Refactorizar para usar inyección de dependencias
+
+const usersDao = new UsersDao()
+const usersRepository = new UserRepository(usersDao)
+const authService = new AuthService(usersRepository);
+const userController = new AuthController(authService);
 
 const router = Router()
 
 
 router
-  .post('/register', registerValidator, validateRequest, register) 
-  .post('/', loginValidator, validateRequest, login)
-  .get('/renew', validateRequest, revalidateToken) 
+  .post('/register', registerValidator, validateRequest, userController.register) 
+  .post('/login', loginValidator, validateRequest, userController.login)
+  .get('/renew', validateRequest, userController.revalidateToken) 
 
 
 export default router

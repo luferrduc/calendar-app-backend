@@ -13,7 +13,7 @@ export interface LoginBody {
 }
 
 
-export interface User {
+export interface IUser {
   email: string;
   password: string;
   name: string;

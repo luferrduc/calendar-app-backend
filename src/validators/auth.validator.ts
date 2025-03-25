@@ -19,7 +19,7 @@ export const registerValidator = [
     //   minUppercase: 1
     // })
     .isLength({ min: 6 }).withMessage("password must be at least 6 characters")
-    .matches(/[a-z].*[a-z].*[a-z]/).withMessage("password must contain at least one lowercase letter")
+    .matches(/[a-z]/).withMessage("password must contain at least one lowercase letter")
     .matches(/[A-Z]/).withMessage("password must contain at least one uppercase letter")
     .matches(/[0-9]/).withMessage("password must contain at least one number")
 ]
