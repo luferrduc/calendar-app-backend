@@ -13,9 +13,14 @@ export class AuthService {
   
   }
   
-  login = async ({ password, email }: Omit<IUser, 'name'>) => {
-    const result = this.usersRepository.login({ password, email })
+  login = async (email: string) => {
+    const result = await this.usersRepository.login(email)
+    return result
   }
   
+  showPublicUser = async (user: IUser) => {
+    const publicUser = await this.usersRepository.showPublicUser(user)
+    return publicUser
+  }
   
 }

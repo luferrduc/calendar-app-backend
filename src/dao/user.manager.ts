@@ -26,4 +26,9 @@ export class Users {
     const user = await usersModel.findOne({ email })
     return user
   }
+
+  delete = async (email: string) => {
+    const result = await usersModel.findOneAndDelete({ email })
+    return result
+  }
 }

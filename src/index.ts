@@ -2,10 +2,13 @@ import express from 'express'
 import path from 'path'
 
 import configs from './config'
-import { addLogger } from './utils/logger'
+// import { addLogger } from './utils/logger'
+
 import authRouter from './routes/auth.routes'
 import { globalLogger } from './utils/global.logger'
 import { dbConnection } from './database/db'
+import { errorHandler } from './middlewares/error-handler'
+import { addLogger } from './middlewares/app.logger'
 
 
 
@@ -23,6 +26,7 @@ const HOST_URL = configs.HOST
 app.use(express.json())
 app.use(express.static(path.join(__dirname, "public")))
 app.use(addLogger)
+app.use(errorHandler)
 
 // Routes
 app.use('/api/auth', authRouter)
