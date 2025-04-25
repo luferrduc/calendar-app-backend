@@ -6,6 +6,7 @@ import { Users as UsersDao} from "../dao/user.manager"
 import { UserRepository } from "../repositories/user.repository";
 import { AuthService } from "../services/auth.service";
 import { UserService } from "../services/user.service";
+import { validateJWT } from "../middlewares/validate-jwt";
 
 // TODO: Refactorizar para usar inyección de dependencias
 
@@ -22,7 +23,7 @@ const router = Router()
 router
   .post('/register', registerValidator, validateRequest, userController.register) 
   .post('/login', loginValidator, validateRequest, userController.login)
-  .get('/renew', validateRequest, userController.revalidateToken) 
+  .get('/renew', validateJWT, userController.revalidateToken) 
 
 
 export default router

@@ -1,6 +1,6 @@
 import express from 'express'
 import path from 'path'
-
+import cors from 'cors'
 import configs from './config'
 // import { addLogger } from './utils/logger'
 
@@ -23,6 +23,7 @@ const PORT = configs.PORT
 const HOST_URL = configs.HOST
 
 // Middlewares
+app.use(cors())
 app.use(express.json())
 app.use(express.static(path.join(__dirname, "public")))
 app.use(addLogger)

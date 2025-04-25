@@ -19,3 +19,8 @@ export interface IUser {
   password: string;
   name: string;
 }
+
+export interface UserReq {
+  _id: string;
+  name: string;
+}

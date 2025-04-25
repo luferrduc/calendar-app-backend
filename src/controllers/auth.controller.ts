@@ -119,10 +119,17 @@ export class AuthController {
   }
   
   
-  revalidateToken = (_req: Request, res: Response) => {
-    res.json({
+  revalidateToken = async (req: Request, res: Response) => {
+    const { user } = req
+
+    const token = await generateToken(user!)
+
+    return res.json({
       status: 'success',
-      message: 'revalidateToken'
+      message: 'Token revalidated successfully',
+      data: {
+        token
+      }
     })
   }
 }

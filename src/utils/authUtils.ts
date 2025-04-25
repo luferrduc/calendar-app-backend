@@ -43,6 +43,7 @@ export const generateToken = (user: Omit<IUser, 'password' | 'email'>, expires: 
 	})
 }
 
-export const verifyToken = (_token: string) => {
-
+export const verifyToken = (token: string) => {
+	const payload = jwt.verify(token, configs.PRIVATE_KEY_JWT)
+	return payload
 }
