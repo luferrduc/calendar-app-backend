@@ -6,7 +6,7 @@ import { createHash } from "../utils/authUtils"
 export class AuthService {
   constructor(private usersRepository: UserRepository){}
 
-  register = async (user: IUser) => {
+  register = async (user: Omit<IUser, '_id'>) => {
     const hashedPassword = createHash(user.password)  
     const newUser = await this.usersRepository.register({ ...user, password: hashedPassword })
     return newUser

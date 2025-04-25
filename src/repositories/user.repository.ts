@@ -8,7 +8,7 @@ export class UserRepository {
 
   constructor(private dao: UsersManager){}
 
-  register = async (user: IUser) => {
+  register = async (user: Omit<IUser, '_id'>) => {
     const newUser = await this.dao.create(user)
     return newUser
   }

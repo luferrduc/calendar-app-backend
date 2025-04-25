@@ -22,13 +22,27 @@ export const isValidPassowrd = (plainPassword: string, hashedPassword: string) =
 // Generate JWT
 type JwtExpiresIn = Exclude<jwt.SignOptions["expiresIn"], undefined>
 
-export const generateToken = (user: unknown, expires: JwtExpiresIn = "24h") => {
-	if (!configs.PRIVATE_KEY_JWT) {
-		globalLogger.error("PRIVATE_KEY_JWT is not defined")
-    throw new Error("JWT Token is not defined");
-  }
-	const token = jwt.sign({ user }, configs.PRIVATE_KEY_JWT, {
-		expiresIn: expires
+export const generateToken = (user: Omit<IUser, 'password' | 'email'>, expires: JwtExpiresIn = "24h") : Promise<string | undefined>  => {
+
+	return new Promise ((resolve, reject) => {
+
+		if (!configs.PRIVATE_KEY_JWT) {
+			globalLogger.error("PRIVATE_KEY_JWT is not defined")
+			// throw new Error("JWT Token is not defined")
+			reject("JWT Token is not defined")
+		}
+		jwt.sign({ user }, configs.PRIVATE_KEY_JWT, {
+			expiresIn: expires
+		}, (err, token) => {
+			if(err){
+				globalLogger.error(err?.message || 'Error al generar el Token')
+				reject('Error al generar el Token')
+			}
+			resolve(token)
+		})
 	})
-	return token
+}
+
+export const verifyToken = (_token: string) => {
+
 }

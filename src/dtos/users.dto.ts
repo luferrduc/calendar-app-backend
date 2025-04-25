@@ -13,6 +13,7 @@ export default class UsersDto  {
   }
   getPublicData(){
     const publicUser = {
+      _id: this.user._id,
       name : this.user.name,
       email : this.user.email
     }

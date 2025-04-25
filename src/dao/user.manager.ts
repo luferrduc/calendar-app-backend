@@ -12,7 +12,7 @@ export class Users {
     return users
   }
 
-  create = async (user: IUser) => {
+  create = async (user: Omit<IUser, '_id'>) => {
     const newUser = await usersModel.create(user)
     return newUser
   }

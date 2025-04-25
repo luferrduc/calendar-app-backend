@@ -32,7 +32,7 @@ export class AuthController {
         })
       }
 
-      const user: IUser = {
+      const user: Omit<IUser, '_id'> = {
         email,
         name,
         password
@@ -40,10 +40,16 @@ export class AuthController {
 
       const result = await this.authService.register(user)
 
+      // TODO: generar token
+      const token = await generateToken({ _id: result._id , name: result.name }, "2h")
+
       return res.status(201).json({
         status: 'success',
         message: 'User created successfully',
-        data: result
+        data: {
+          user: result,
+          token
+        }
       })
     } catch (error) {
       // if(error instanceof HttpException){
@@ -57,7 +63,7 @@ export class AuthController {
 
       return res.json({
         status: 'error',
-        error: 'Internal server error' 
+        error: 'Internal server error'
       })
 
     }
@@ -87,9 +93,9 @@ export class AuthController {
         }) 
       }
 
-      const publicUser = await this.authService.showPublicUser(user)
+      const { _id, name } = await this.authService.showPublicUser(user)
       // TODO: generate JWT
-      const token = generateToken(publicUser)
+      const token = await generateToken({ _id, name }, "2h")
 
       return res.json({
         status: 'success',
