@@ -4,7 +4,10 @@ import cors from 'cors'
 import configs from './config'
 // import { addLogger } from './utils/logger'
 
+// Routers
 import authRouter from './routes/auth.routes'
+import eventsRouter from './routes/events.routes'
+
 import { globalLogger } from './utils/global.logger'
 import { dbConnection } from './database/db'
 import { errorHandler } from './middlewares/error-handler'
@@ -31,6 +34,7 @@ app.use(errorHandler)
 
 // Routes
 app.use('/api/auth', authRouter)
+app.use('/api/events', eventsRouter)
 
 // TODO: CRUD -> Eventos
 
