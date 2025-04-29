@@ -1,5 +1,5 @@
 import { EventRepository } from "../repositories/events.repository";
-import { UpdateEvent } from "../types/events.types";
+import { IEvent, UpdateEventBody } from "../types/events.types";
 
 
 
@@ -12,12 +12,12 @@ export class EventService {
     return events  
   } 
 
-  createEvent = async () => {
-    const result = await this.eventRepository.createEvent()
+  createEvent = async (event: Omit<IEvent, '_id'>) => {
+    const result = await this.eventRepository.createEvent(event)
     return result
   }
 
-  updateEvent = async (id: string, event: UpdateEvent) => {
+  updateEvent = async (id: string, event: UpdateEventBody) => {
     const updatedEvent = await this.eventRepository.updateEvent(id, event)
     return updatedEvent
   }

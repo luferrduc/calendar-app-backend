@@ -1,5 +1,5 @@
 import { Event as EventManager } from "../dao/event.manager";
-import { UpdateEvent } from "../types/events.types";
+import { IEvent, UpdateEventBody } from "../types/events.types";
 
 
 
@@ -11,12 +11,12 @@ export class EventRepository {
     return events
   }
 
-  createEvent = async () => {
-    const result = await this.dao.createEvent()
+  createEvent = async (event: Omit<IEvent, '_id'>) => {
+    const result = await this.dao.createEvent(event)
     return result
   }
 
-  updateEvent = async (id: string, event: UpdateEvent) => {
+  updateEvent = async (id: string, event: UpdateEventBody) => {
     const updatedEvent = await this.dao.updateEvent(id, event)
     return updatedEvent
   }

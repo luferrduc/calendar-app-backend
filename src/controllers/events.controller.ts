@@ -1,5 +1,6 @@
 import { Request, Response } from "express"
 import { EventService } from "../services/events.service";
+import { EventBody, IEvent, UpdateEventBody } from "../types/events.types";
 
 
 
@@ -9,19 +10,39 @@ export class EventController {
   ){}
 
 
-  getEvents = async (_req: Request, res: Response) => {
-    // const events = await this.eventService.getEvents()
-    return res.json({
-      status: "success",
-      data: {
-        message: "getEvents"
+  getEvents = async (req: Request, res: Response) => {
+    try {
+      const events = await this.eventService.getEvents()
+      return res.json({
+        status: "success",
+        message: "getEvents",
+        data: {
+          events
+        }
+      })
+    } catch (error) {
+      if(error instanceof Error){
+        req.logger.error(error.message)
       }
-    })
+
+      return res.json({
+        status: 'error',
+        error: 'Internal server error' 
+      })
+    }
   } 
 
 
-  createEvent = async (_req: Request, res: Response) => {
-    // const result = await this.eventService.createEvent()
+  createEvent = async (req: Request<{}, {}, EventBody>, res: Response) => {
+    const { title, notes, start, end, bgColor } = req.body
+    const event = {
+      title, 
+      notes, 
+      start: new Date(start), 
+      end: new Date(end), 
+      bgColor
+    } 
+    const result = await this.eventService.createEvent(event)
     return res.json({
       status: "success",
       data: {
@@ -31,9 +52,9 @@ export class EventController {
   }
 
   
-  updateEvent = async (req: Request, res: Response) => {
+  updateEvent = async (req: Request<{ id: string }, {}, UpdateEventBody>, res: Response) => {
     const { id: _id } = req.params
-    const { event } = req.body
+    // const { title, notes, start, end, bgColor } = req.body
     // const updatedEvent = await this.eventService.updateEvent(_id, event)
     return res.json({
       status: "success",

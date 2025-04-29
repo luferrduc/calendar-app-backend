@@ -9,6 +9,8 @@ import { Event } from "../dao/event.manager";
 import { EventService } from "../services/events.service";
 import { EventRepository } from "../repositories/events.repository";
 import { validateJWT } from "../middlewares/validate-jwt";
+import { createValidator } from "../validators/event.validator";
+import { validateRequest } from "../middlewares/validateRequest";
 
 
 const eventDao = new Event()
@@ -23,7 +25,7 @@ router.use(validateJWT)
 
 router
   .get("/", eventController.getEvents)
-  .post("/", eventController.createEvent)
+  .post("/", createValidator, validateRequest, eventController.createEvent)
   .put("/:id", eventController.updateEvent)
   .delete("/:id", eventController.deleteEvent)
 

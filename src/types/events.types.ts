@@ -2,11 +2,21 @@
 
 
 export interface IEvent {
-  name: string;
+  _id: string;
+  title: string;
+  notes: string;
   start: Date;
   end: Date;
-  description: string;
+  bgColor: string;
+}
+
+export interface EventBody {
+  title: string;
+  notes: string;
+  start: Date;
+  end: Date;
+  bgColor: string;
 }
 
 
-export type UpdateEvent = Partial<IEvent>
+export type UpdateEventBody = Partial<EventBody>

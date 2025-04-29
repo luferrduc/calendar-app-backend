@@ -1,4 +1,4 @@
-import { UpdateEvent } from "../types/events.types"
+import { IEvent, UpdateEventBody } from "../types/events.types"
 import eventsModel from "./models/event.model"
 
 
@@ -10,12 +10,12 @@ export class Event {
     return events
   }
 
-  createEvent = async () => {
-    const result = await eventsModel.create()
+  createEvent = async (event: Omit<IEvent, '_id'>) => {
+    const result = await eventsModel.create(event)
     return result
   }
 
-  updateEvent = async (id: string, event: UpdateEvent) => {
+  updateEvent = async (id: string, event: UpdateEventBody) => {
     const updatedEvent = await eventsModel.findOneAndUpdate({ _id: id, event })
     return updatedEvent
   }
